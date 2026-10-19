@@ -1,10 +1,16 @@
-# Perfect Imperfections Hair Studio — v1
-Mobile-first black and metallic-gold app with service menu, appointment date/time selector, policy/contact sections, and SMS-based appointment requests.
+# Perfect Imperfections Hair Studio — Supabase-connected starter
 
-## Important
-This first version is a static prototype. It has no database, live availability, payment processing, automated reminders, or owner/admin dashboard. The booking form opens a prefilled text message to Sasha; the customer must tap Send. Sasha must approve each request and confirm the deposit. The app does not automatically confirm appointments or take deposits online.
+This package preserves the black-and-metallic-gold salon site and adds Supabase appointment submission plus an owner dashboard for sign-in, reviewing requests, changing appointment status, marking deposits after manual Chime verification, and private notes.
 
-## Publish
-Upload `index.html` and `manifest.json` to the root of the GitHub Pages repository, replacing the existing `index.html` and `manifest.json`. Wait for GitHub Pages to deploy, then open the published URL in Safari on iPhone and choose Share → Add to Home Screen.
+## Before publishing
+1. In Supabase SQL Editor, run `SETUP_SQL.sql` (adds `client_type`, used by the booking form).
+2. Open `config.js` and replace the two placeholder values with the Project URL and **Publishable** key from Supabase. Do not use a secret key or service-role key in browser code.
+3. Upload `index.html`, `manifest.json`, and `config.js` to the root of the `perfect-imperfections-hair-studio` GitHub repository, replacing the existing `index.html` and `manifest.json`. Do not change the JM Finance repository.
+4. Wait for GitHub Pages to deploy, then test a request. Sign in from the Owner tab using Sasha's Supabase Auth email/password.
 
-Sasha should review all service details and policies before sharing with clients.
+## Important limitations
+- This package does not send automatic SMS notifications yet. A separate SMS provider and server-side function are required; never put SMS provider secrets in `config.js`.
+- The form stores a requested date/time, not live availability; Sasha must review and confirm each booking.
+- Deposit status should only be changed after Sasha manually verifies the deposit in Chime. No payment credentials are collected.
+- Keep Supabase RLS enabled. The owner dashboard relies on the existing `salon_owners` and appointment policies created in the setup steps.
+- This starter uses the Supabase browser library from its public CDN.
