@@ -1,0 +1,9 @@
+{
+  "name": "Perfect Imperfections Hair Studio",
+  "short_name": "Perfect Imperfections",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#090909",
+  "description": "Luxury hair services and appointment requests."
+}
