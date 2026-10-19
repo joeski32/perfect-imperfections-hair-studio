@@ -27,20 +27,12 @@
 <footer class="footer">PERFECT IMPERFECTIONS HAIR STUDIO<br>Luxury in every detail · Appointment requests require owner approval.</footer></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script>
 <script>
 const items=[["Wig closure","$150 · 2 hrs"],["Wig frontal","$200 · 2 hrs"],["Wig re-install","$130 · 2 hrs"],["Natural blowout","$75 · 1 hr"],["Silk press","$100 · 2 hrs"],["Pixie shampoo & curl","$75 · 1.5 hrs"],["Virgin relaxer","$200 · 3.5 hrs"],["Relaxer retouch","$120 · 2 hrs"],["Traditional sew-in","$175 · 2.5 hrs"],["Lace closure sew-in","$225 · 3 hrs"],["Traditional quick weave","$120 · 2 hrs"],["Bob quick weave","$150 · 2 hrs"],["Half-up quick weave","$150 · 2 hrs"],["Lace closure quick weave","$175 · 3 hrs"],["Quick weave bob — basic hair included","$220 · 2 hrs"],["Quick weave bob — layered","$250 · 2.5 hrs"],["Quick weave bob — illusion part","$260 · 2.5 hrs"],["Quick weave bob — lace closure","$300 · 3 hrs"],["Flat iron","$30 · 30 min"],["Barrel curls","$30 · 30 min"],["Wand curls","$60 · 1 hr"],["Crimp curls","$75 · 1 hr"],["Brow arch","$15 · 15 min"],["Brow fill-in","$25 · 15 min"],["Brow combo","$60 · 40 min"],["Lash application","$15 · 15 min"],["Basic cut","$35+ · 30 min"],["Shampoo add-on","$30 · 10 min"],["Blow dry add-on","$15 · 15 min"],["Detangle add-on","$25 · 20 min"],["Deep conditioner","$15 · 15 min"],["Trim","$20 · 15 min"],["Aloe & peppermint treatment","$15 · 20 min"],["Wig style","$30+"]];
 const sel=document.querySelector('#service'),grid=document.querySelector('#serviceGrid');items.forEach(([n,p])=>{let o=document.createElement('option');o.value=n;o.textContent=n+' — '+p;sel.appendChild(o);let d=document.createElement('div');d.className='service';d.innerHTML='<strong>'+n+'</strong><span class="price">'+p+'</span><button type="button" class="btn alt">Choose</button>';d.querySelector('button').onclick=()=>{sel.value=n;tab('book')};grid.appendChild(d)});
 function tab(id){document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));window.scrollTo({top:0,behavior:'smooth'})}
 const date=document.querySelector('#date'),time=document.querySelector('#time');date.min=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);
 function times(){time.innerHTML='<option value="">Choose a time</option>';if(!date.value)return;let day=new Date(date.value+'T12:00:00').getDay();if(![4,5,6].includes(day)){time.innerHTML='<option value="">Closed that day — choose Thu–Sat</option>';return}let end=day===6?14:17;for(let h=10;h<end;h++)for(let m of [0,30]){if(h===end-1&&m===30)continue;let o=document.createElement('option');o.value=(h%12||12)+':'+(m?'30':'00')+' '+(h<12?'AM':'PM');o.textContent=o.value;time.appendChild(o)}}date.addEventListener('change',times);
-const cfg=window.PI_SUPABASE_CONFIG||{};
-let supabaseClient=null;
-if(window.supabase&&cfg.url&&cfg.publishableKey&& !String(cfg.url).includes('PASTE_') && !String(cfg.publishableKey).includes('PASTE_')){
-  supabaseClient=window.supabase.createClient(cfg.url,cfg.publishableKey);
-}
-function say(id,msg){const el=document.getElementById(id);if(el)el.textContent=msg;}
 const cfg=window.PI_SUPABASE_CONFIG||{};
 let supabaseClient=null;
 if(window.supabase&&cfg.url&&cfg.publishableKey&& !String(cfg.url).includes('PASTE_') && !String(cfg.publishableKey).includes('PASTE_')){
